@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json.schemastore.org/package.json",
+  "name": "hot-shot-starter-kit",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Hot Shot Starter Kit. A starter kit for building APIs with Hono, Hot Shot, and Postgres.",
+  "keywords": ["hot-shot", "starter-kit", "api", "postgres", "hono", "biome"],
+  "author": "Mr. Wayne",
+  "license": "MIT",
+  "cpu": ["x64"],
+  "dist": {
+    "directory": "dist",
+    "type": "standalone"
+  },
+  "main": "dist/app.js",
+  "scripts": {
+    "start": "bun run ./dist/app.js",
+    "start:multi": "bun run ./multi-threaded-server.js",
+    "build": "rm -rf dist && bun run ./bundler.js",
+    "dev": "bun run --hot --no-clear-screen src/app.ts",
+    "lint": "bunx biome check --write src",
+    "hotshot": "bun run --bun ./node_modules/@a4arpon/hotshot/build/main.js"
+  },
+  "dependencies": {
+    "@a4arpon/hotshot": "npm:@jsr/a4arpon__hotshot",
+    "bullmq": "^5.22.0",
+    "drizzle-orm": "^0.36.0",
+    "drizzle-zod": "^0.5.1",
+    "hono": "^4.6.8",
+    "ioredis": "^5.4.1",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.16",
+    "postgres": "^3.4.5",
+    "sharp": "^0.33.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "@types/bun": "^1.1.12",
+    "@types/jsonwebtoken": "^9.0.7",
+    "@types/nodemailer": "^6.4.16",
+    "drizzle-kit": "^0.27.1",
+    "typescript": "^5.6.3"
+  }
+}

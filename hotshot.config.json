@@ -1,0 +1,42 @@
+{
+  "registry": "https://github.com/a4arpon/hot-shot/registry.json",
+  "projectType": "ts",
+  "contains": {
+    "mods": [
+      {
+        "type": "router",
+        "name": "auth-user",
+        "path": "./src/mods/auth-user-mod",
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "auth-user.services",
+          "token.services"
+        ]
+      },
+      {
+        "type": "router",
+        "name": "auth-store",
+        "path": "./src/mods/auth-store-mod",
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "auth-store.services",
+          "token.services"
+        ]
+      }
+    ],
+    "middlewares": [
+      {
+        "name": "auth-user",
+        "path": "./src/middlewares/auth-user.middleware\n    )}"
+      }
+    ]
+  }
+}
