@@ -1,0 +1,13 @@
+{
+  "buildCommand": "bun run deploy",
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "dist/app.js",
+      "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+      "headers": {
+        "Access-Control-Allow-Origin": "*"
+      }
+    }
+  ]
+}
