@@ -1,9 +1,9 @@
-import { cacheNameGenetor, cacheResponse } from "#libs/cache-factory"
+import { cacheNameGenetor, cacheResponse } from "#libs/ioredis-json"
 
 export class UserCache {
   public readonly cachePartition = "user-cache"
 
-  async create<T>(payload: T, key: string) {
+  async create<T>(key: string, payload: T) {
     return cacheResponse(
       cacheNameGenetor(this.cachePartition, key),
       null,

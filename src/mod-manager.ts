@@ -9,7 +9,7 @@
 import { routerFactory } from "@a4arpon/hotshot"
 import { AuthStoreRouter } from "#mods/auth-store-mod/routes"
 import { AuthUserRouter } from "#mods/auth-user-mod/routes"
-import { MailQueue } from "#queues/mail.queues"
+import { MailQueueWroker } from "#queues/mail.queues"
 
 /*
  * ------------------------------------------------------------------------
@@ -28,4 +28,4 @@ export const applicationRoutes = routerFactory([
  * ------------------------------------------------------------------------
  */
 
-export const applicationWorkers = [MailQueue]
+export const applicationWorkers = [MailQueueWroker]
