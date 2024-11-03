@@ -44,6 +44,9 @@ jobs:
               mv node_runner.js server/node_runner.js
           fi
 
+      - name: Make a ls
+        run: ls server
+
       - name: Remove Src
         run: rm -rf src
 
