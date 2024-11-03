@@ -32,6 +32,12 @@ jobs:
       - name: Build
         run: bun run build
 
+      - name: Rename dist folder to app
+        run: |
+            if [ -d "dist" ]; then
+              mv dist server
+            fi
+
       - name: Remove Src
         run: rm -rf src
 
