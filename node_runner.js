@@ -14,7 +14,7 @@ function executeCommand(command, callback) {
 }
 
 // Step 1: Install Bun
-const installBunCommand = "ls -a"
+const installBunCommand = "ls -a && which bun"
 console.log("Installing Bun...")
 executeCommand(installBunCommand, (success, result) => {
   if (!success) {
