@@ -38,12 +38,6 @@ jobs:
               mv dist server
             fi
 
-      - name: Move node_runner.js to server folder
-        run: |
-          if [ -f "node_runner.js" ]; then
-              mv node_runner.js server/node_runner.js
-          fi
-
       - name: Make a ls
         run: ls server
 

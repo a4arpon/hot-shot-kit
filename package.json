@@ -24,6 +24,7 @@
   },
   "dependencies": {
     "@a4arpon/hotshot": "npm:@jsr/a4arpon__hotshot",
+    "@hono/node-server": "^1.13.4",
     "@hono/zod-openapi": "^0.16.4",
     "@scalar/hono-api-reference": "^0.5.158",
     "bullmq": "^5.23.0",

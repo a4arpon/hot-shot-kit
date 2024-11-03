@@ -10,6 +10,7 @@ import { startQueues } from "#libs/queue-starter"
 import { applicationRoutes, applicationWorkers } from "./mod-manager"
 import { openAPI } from "#libs/open-api"
 import { apiReference } from "@scalar/hono-api-reference"
+import { serve } from "@hono/node-server"
 
 async function bootstrap() {
   const app = new Hono()
@@ -43,11 +44,18 @@ async function bootstrap() {
    * ---------------------------------------------------------------------
    */
 
-  Bun.serve({
-    fetch: app.fetch,
-    port: env.PORT,
-    reusePort: true,
-  })
+  if (typeof Bun !== "undefined") {
+    Bun.serve({
+      fetch: app.fetch,
+      port: env.PORT,
+      reusePort: true,
+    })
+  } else {
+    serve({
+      fetch: app.fetch,
+      port: Number.parseInt(env.PORT),
+    })
+  }
 }
 
 bootstrap()
