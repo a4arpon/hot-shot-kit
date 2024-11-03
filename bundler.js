@@ -1,6 +1,6 @@
 Bun.build({
   entrypoints: ["./src/app.ts"],
-  outdir: "./app",
+  outdir: "./dist",
   target: "bun",
   splitting: true,
   sourcemap: "external",
