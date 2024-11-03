@@ -1,9 +1,18 @@
 {
-  "buildCommand": "bun run start",
+  "builds": [
+    {
+      "src": "server/app.js",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["server/**"]
+      }
+    }
+  ],
+  "buildCommand": "bun run vercel:prod",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "dist/app.js",
+      "dest": "server/app.js",
       "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
