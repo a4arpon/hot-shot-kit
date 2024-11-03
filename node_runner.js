@@ -1,5 +1,4 @@
-const { exec } = require("node:child_process")
-const path = require("node:path")
+import { exec } from "node:child_process"
 
 // Function to execute shell commands
 function executeCommand(command, callback) {
