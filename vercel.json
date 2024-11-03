@@ -1,18 +1,18 @@
 {
   "builds": [
     {
-      "src": "server/node_runner.js",
+      "src": "server/app.js",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["server/**"]
       }
     }
   ],
-  "buildCommand": "npm i bun && bun run vercel:prod",
+  "buildCommand": "npm run vercel:prod",
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server/node_runner.js",
+      "dest": "server/app.js",
       "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"

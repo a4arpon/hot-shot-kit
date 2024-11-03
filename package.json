@@ -15,7 +15,7 @@
   "main": "dist/app.js",
   "scripts": {
     "start": "bun run ./dist/app.js",
-    "vercel:prod": "bun run ./server/node_runner.js",
+    "vercel:prod": "node./server/app.js",
     "start:multi": "bun run ./multi-threaded-server.js",
     "build": "rm -rf dist && bun run ./bundler.js",
     "dev": "bun run --hot --no-clear-screen src/app.ts",
