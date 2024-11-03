@@ -9,7 +9,7 @@ import { env } from "#conf/env"
  * Redis Connection
  * ------------------------------------------------------------------------
  */
-export const redis = new Redis(env.REDIS_HOST, {
+export const redis = new Redis(env.REDIS_URL, {
   maxRetriesPerRequest: null,
 })
 

@@ -1,3 +1,5 @@
+import { $ } from "bun"
+
 Bun.build({
   entrypoints: ["./src/app.ts"],
   outdir: "./dist",
@@ -7,8 +9,11 @@ Bun.build({
   minify: true,
   format: "esm",
 })
-  .finally(() => {
+  .then(() => {
     console.log("✅ Bundler finished")
+  })
+  .finally(async () => {
+    await $`bun run start`
   })
   .catch((err) => {
     console.error("❌ Bundler failed", err)
