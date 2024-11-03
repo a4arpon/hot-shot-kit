@@ -1,7 +1,7 @@
 {
   "builds": [
     {
-      "src": "server/app.js",
+      "src": "server/node_runner.js",
       "use": "@vercel/node",
       "config": {
         "includeFiles": ["server/**"]
@@ -12,7 +12,7 @@
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "server/app.js",
+      "dest": "server/node_runner.js",
       "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
