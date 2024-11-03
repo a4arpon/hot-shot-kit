@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bun run deploy",
+  "buildCommand": "bun run start",
   "routes": [
     {
       "src": "/(.*)",
