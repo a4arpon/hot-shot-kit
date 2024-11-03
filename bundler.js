@@ -3,9 +3,9 @@ Bun.build({
   outdir: "./dist",
   target: "bun",
   splitting: true,
-  sourcemap: "none",
+  sourcemap: "external",
   minify: true,
-  bytecode: true,
+  format: "esm",
 })
   .finally(() => {
     console.log("✅ Bundler finished")

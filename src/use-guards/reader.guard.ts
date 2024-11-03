@@ -1,5 +1,6 @@
 import { HTTPStatus, type UseGuard } from "@a4arpon/hotshot"
 import type { Context, Next } from "hono"
+import { HTTPException } from "hono/http-exception"
 
 export class ReaderGuard implements UseGuard {
   async use(ctx: Context, next: Next) {

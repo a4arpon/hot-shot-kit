@@ -1,4 +1,4 @@
-import { randomUUID } from "node:crypto"
+import { randomUUIDv7 } from "bun"
 
 /*
  * ----------------------------------------------------------------------
@@ -9,12 +9,12 @@ import { randomUUID } from "node:crypto"
  */
 
 export function cryptoUUID(length?: number): string {
-  return randomUUID().substring(0, length ? length : 6)
+  return randomUUIDv7().substring(0, length ? length : 6)
 }
 
 export function slugGenerator(text: string) {
   return `${text
     .toLowerCase()
     .replace(/[+%()=/|!@#$%^&*~:"',.`]/g, "")
-    .replace(/\s+/g, "-")}-${randomUUID().substring(0, 6)}`
+    .replace(/\s+/g, "-")}-${randomUUIDv7().substring(0, 6)}`
 }

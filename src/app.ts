@@ -8,6 +8,8 @@ import { corsConfig, secureHeadersConfig } from "#conf/app.conf"
 import { env } from "#conf/env"
 import { startQueues } from "#libs/queue-starter"
 import { applicationRoutes, applicationWorkers } from "./mod-manager"
+import { openAPI } from "#libs/open-api"
+import { apiReference } from "@scalar/hono-api-reference"
 
 async function bootstrap() {
   const app = new Hono()
@@ -19,6 +21,19 @@ async function bootstrap() {
   app.get("/", (c) => {
     return c.json(response("Api server online..."))
   })
+
+  app.route("/", openAPI)
+
+  app.get(
+    "/docs",
+    apiReference({
+      theme: "purple",
+      layout: "classic",
+      spec: {
+        url: "/swagger-doc",
+      },
+    }),
+  )
 
   app.route("/", applicationRoutes)
 
