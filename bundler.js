@@ -5,7 +5,7 @@ Bun.build({
   splitting: true,
   sourcemap: "external",
   minify: true,
-  format: "cjs",
+  format: "esm",
 })
   .finally(() => {
     console.log("✅ Bundler finished")
