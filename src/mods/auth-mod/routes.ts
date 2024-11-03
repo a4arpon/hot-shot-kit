@@ -1,19 +1,19 @@
 import { router, routerContainer } from "@a4arpon/hotshot"
 import type { Hono } from "hono"
-import { AuthStoreController } from "./controller"
+import { AuthController } from "./controller"
 
-export class AuthStoreRouter {
+export class AuthRouter {
   public readonly routes: Hono
 
   constructor() {
     this.routes = routerContainer({
       routers: [this.defaultRoutes()],
-      basePath: "/auth-store",
+      basePath: "/auth",
     })
   }
 
   defaultRoutes() {
-    const authStoreController = new AuthStoreController()
+    const authController = new AuthController()
 
     return router({
       basePath: "/",
@@ -21,7 +21,7 @@ export class AuthStoreRouter {
         {
           path: "/",
           method: "GET",
-          controller: authStoreController.authStore,
+          controller: authController.auth,
         },
       ],
     })

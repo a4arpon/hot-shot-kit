@@ -18,7 +18,7 @@ export function cacheResponse(
   }
 }
 
-export function cacheNameGenetor(cachePartition: string, key: string) {
+export function cacheNameGen(cachePartition: string, key: string) {
   return `${cachePartition}:${key}`
 }
 

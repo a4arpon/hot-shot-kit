@@ -31,6 +31,10 @@ export const mailQueue = new Queue("mail-queue", {
   connection: redis,
 })
 
+export const notificationQueue = new Queue("notification-queue", {
+  connection: redis,
+})
+
 /*
  * ------------------------------------------------------------------------
  * Drizzle Postgres Connection

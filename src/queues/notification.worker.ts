@@ -1,12 +1,12 @@
 import { type Job, Worker } from "bullmq"
-import { mailQueue, redis } from "#libs/conn"
+import { notificationQueue, redis } from "#libs/conn"
 
-export class MailQueueWroker {
+export class NotificationQueueWorker {
   public readonly worker: Worker
 
   constructor() {
     this.worker = new Worker(
-      mailQueue.name,
+      notificationQueue.name,
       async (job: Job) => this.processing(job),
       {
         autorun: false,
@@ -21,18 +21,18 @@ export class MailQueueWroker {
 
   private failed(err: Error, job?: Job) {
     if (job) {
-      console.error(mailQueue.name, "Job Failed :", job.id, err)
+      console.error(notificationQueue.name, "Job Failed :", job.id, err)
     } else {
-      console.error(mailQueue.name, "Job Not Found :", err)
+      console.error(notificationQueue.name, "Job Not Found :", err)
     }
   }
 
   private ready = () => {
-    console.log(mailQueue.name, "Ready...")
+    console.log(notificationQueue.name, "Ready...")
   }
 
   private completed(job: Job) {
-    console.log(mailQueue.name, "Job Completed :", job.id)
+    console.log(notificationQueue.name, "Job Completed :", job.id)
   }
 
   /*

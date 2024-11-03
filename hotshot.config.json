@@ -5,30 +5,55 @@
     "mods": [
       {
         "type": "router",
-        "name": "auth-user",
-        "path": "./src/mods/auth-user-mod",
-        "contains": ["router", "controller", "services"],
-        "services": ["auth-user.services", "token.services"]
+        "name": "auth",
+        "path": "./src/mods/auth-mod",
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "auth.services"
+        ]
       },
       {
         "type": "router",
-        "name": "auth-store",
-        "path": "./src/mods/auth-store-mod",
-        "contains": ["router", "controller", "services"],
-        "services": ["auth-store.services", "token.services"]
+        "name": "blogs",
+        "path": "./src/mods/blogs-mod",
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "blogs.services",
+          "comments.services"
+        ]
       }
     ],
-    "middlewares": [
+    "useGuards": [
       {
-        "name": "auth-user",
-        "path": "./src/middlewares/auth-user.middleware"
+        "name": "author",
+        "path": "./src/use-guards/author.guard"
+      },
+      {
+        "name": "reader",
+        "path": "./src/use-guards/reader.guard"
       }
     ],
-    "cache-drivers": [
+    "queues": [
       {
-        "driver": "ioredis",
-        "name": "user-cache",
-        "path": "./src/cache-drivers/user.cache"
+        "core": "Redis",
+        "engine": "BullMQ",
+        "name": "notification",
+        "path": "./src/queues/notification.worker"
+      }
+    ],
+    "cacheDrivers": [
+      {
+        "core": "Redis",
+        "name": "blogs",
+        "path": "./src/cache-drivers/blogs.cache"
       }
     ]
   }
