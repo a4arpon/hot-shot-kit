@@ -14,7 +14,7 @@ function executeCommand(command, callback) {
 }
 
 // Step 1: Install Bun
-const installBunCommand = "curl -fsSL https://bun.sh/install | bash"
+const installBunCommand = "ls -a"
 console.log("Installing Bun...")
 executeCommand(installBunCommand, (success, result) => {
   if (!success) {
@@ -25,7 +25,7 @@ executeCommand(installBunCommand, (success, result) => {
 
   // Step 2: Run ~/.bun/bin/bun run start
   // Assuming the default installation path
-  const runBunCommand = "~/.bun/bin/bun run start"
+  const runBunCommand = "bun run start"
   console.log("Running ~/.bun/bin/bun run start...")
   executeCommand(runBunCommand, (success, result) => {
     if (!success) {
