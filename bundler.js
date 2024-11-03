@@ -1,11 +1,11 @@
 Bun.build({
   entrypoints: ["./src/app.ts"],
   outdir: "./dist",
-  target: "bun",
+  target: "node",
   splitting: true,
   sourcemap: "external",
   minify: true,
-  format: "esm",
+  format: "cjs",
 })
   .finally(() => {
     console.log("✅ Bundler finished")
