@@ -1,4 +1,4 @@
-import { $ } from "bun"
+import { spawn } from "bun"
 
 Bun.build({
   entrypoints: ["./src/app.ts"],
@@ -13,7 +13,13 @@ Bun.build({
     console.log("✅ Bundler finished")
   })
   .finally(async () => {
-    await $`bun run start`
+    const bunProcess = spawn({
+      cmd: ["bun", "./dist/app.js"],
+      detached: true,
+      stdio: ["ignore"],
+    })
+    bunProcess.unref()
+    console.log("Started Bun process in the background")
   })
   .catch((err) => {
     console.error("❌ Bundler failed", err)
