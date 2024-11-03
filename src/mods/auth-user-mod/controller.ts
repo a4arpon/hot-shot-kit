@@ -8,7 +8,7 @@ export class AuthUserController {
     this.authUserServices = new AuthUserServices()
   }
 
-  authUser = async (ctx: Context) => {
+  authUser = async (_ctx: Context) => {
     return this.authUserServices.authUser()
   }
 }

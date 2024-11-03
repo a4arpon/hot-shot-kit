@@ -7,7 +7,7 @@ export class MailQueue {
   constructor() {
     this.worker = new Worker(
       MailQueue.name,
-      async (job) => this.processor(job),
+      async (job: Job) => this.processing(job),
       {
         autorun: false,
         connection: redis,
@@ -19,24 +19,33 @@ export class MailQueue {
     this.worker.on("completed", (job) => this.completed(job))
   }
 
-  private async processor(job: Job) {
-    console.log("Mail Queue Processor Running...")
-    console.log(job.data)
-  }
-
   private failed(err: Error, job?: Job) {
     if (job) {
-      console.error("Mail Queue Job Failed:", err)
+      console.error(MailQueue.name, "Job Failed :", job.id, err)
     } else {
-      console.error("Mail Queue Job Not Found:", err)
+      console.error(MailQueue.name, "Job Not Found :", err)
     }
   }
 
   private ready = () => {
-    console.log("Mail Queue Ready...")
+    console.log(MailQueue.name, "Ready...")
   }
 
   private completed(job: Job) {
-    console.log("Mail Queue Job Completed:", job)
+    console.log(MailQueue.name, "Job Completed :", job.id)
+  }
+
+  /*
+   * ---------------------------------------------------------------------
+   * Queue Processing Function
+   *
+   * This function is called by the queue worker when a job is processed.
+   * The job is passed as a parameter.
+   * Write your processing logic here.
+   * ---------------------------------------------------------------------
+   */
+
+  private async processing(job: Job) {
+    console.log(job.data)
   }
 }

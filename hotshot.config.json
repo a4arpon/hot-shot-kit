@@ -7,35 +7,28 @@
         "type": "router",
         "name": "auth-user",
         "path": "./src/mods/auth-user-mod",
-        "contains": [
-          "router",
-          "controller",
-          "services"
-        ],
-        "services": [
-          "auth-user.services",
-          "token.services"
-        ]
+        "contains": ["router", "controller", "services"],
+        "services": ["auth-user.services", "token.services"]
       },
       {
         "type": "router",
         "name": "auth-store",
         "path": "./src/mods/auth-store-mod",
-        "contains": [
-          "router",
-          "controller",
-          "services"
-        ],
-        "services": [
-          "auth-store.services",
-          "token.services"
-        ]
+        "contains": ["router", "controller", "services"],
+        "services": ["auth-store.services", "token.services"]
       }
     ],
     "middlewares": [
       {
         "name": "auth-user",
-        "path": "./src/middlewares/auth-user.middleware\n    )}"
+        "path": "./src/middlewares/auth-user.middleware"
+      }
+    ],
+    "cache-drivers": [
+      {
+        "driver": "ioredis",
+        "name": "user-cache",
+        "path": "./src/cache-drivers/user.cache"
       }
     ]
   }

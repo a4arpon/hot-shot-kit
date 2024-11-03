@@ -22,8 +22,6 @@ async function bootstrap() {
 
   app.route("/", applicationRoutes)
 
-  await startQueues(applicationWorkers)
-
   /*
    * ---------------------------------------------------------------------
    * Application Server Adapter
@@ -38,6 +36,9 @@ async function bootstrap() {
 }
 
 bootstrap()
+  .then(async () => {
+    await startQueues(applicationWorkers)
+  })
   .then(() => {
     console.log(`Application Running on http://localhost:${env.PORT}`)
   })

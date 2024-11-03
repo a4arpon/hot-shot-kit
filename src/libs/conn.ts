@@ -1,6 +1,6 @@
 import { Queue } from "bullmq"
 import { drizzle } from "drizzle-orm/postgres-js"
-import { Redis } from "ioredis"
+import Redis from "ioredis"
 import postgres from "postgres"
 import { env } from "#conf/env"
 
