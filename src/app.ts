@@ -8,9 +8,10 @@ import { corsConfig, secureHeadersConfig } from "#conf/app.conf"
 import { env } from "#conf/env"
 import { startQueues } from "#libs/queue-starter"
 import { applicationRoutes, applicationWorkers } from "./mod-manager"
-import { openAPI } from "#libs/open-api"
-import { apiReference } from "@scalar/hono-api-reference"
 import { serve } from "@hono/node-server"
+import { getRuntimeKey } from "hono/adapter"
+import { swaggerUI } from "@hono/swagger-ui"
+import { swaggerDocument } from "#libs/open-api"
 
 async function bootstrap() {
   const app = new Hono()
@@ -23,16 +24,15 @@ async function bootstrap() {
     return c.json(response("Api server online..."))
   })
 
-  app.route("/", openAPI)
+  app.get("/openapi.json", (c) => {
+    return c.json(swaggerDocument)
+  })
 
   app.get(
     "/docs",
-    apiReference({
-      theme: "purple",
-      layout: "classic",
-      spec: {
-        url: "/swagger-doc",
-      },
+    swaggerUI({
+      url: "/openapi.json",
+      layout: "BaseLayout",
     }),
   )
 
@@ -63,7 +63,12 @@ bootstrap()
     await startQueues(applicationWorkers)
   })
   .then(() => {
-    console.log(`Application Running on http://localhost:${env.PORT}`)
+    console.table({
+      PORT: env.PORT,
+      ENV: process.env.NODE_ENV,
+      URL: `http://localhost:${env.PORT}`,
+      Adapter: getRuntimeKey(),
+    })
   })
   .catch((err) => {
     console.error("Application Runtime Error", err)
