@@ -3,6 +3,7 @@ import { drizzle } from "drizzle-orm/postgres-js"
 import Redis from "ioredis"
 import postgres from "postgres"
 import { env } from "#conf/env"
+import * as schema from "#schemas/@index"
 
 /*
  * ------------------------------------------------------------------------
@@ -42,5 +43,5 @@ export const notificationQueue = new Queue("notification-queue", {
  */
 export const pgDrizzle = drizzle(postgres(env.DATABASE_URL), {
   logger: false,
-  // schema: schema,
+  schema: schema,
 })

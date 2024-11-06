@@ -16,6 +16,7 @@
       "#middlewares/*": ["src/middlewares/*"],
       "#schemas/*": ["src/schemas/*"],
       "#mods/*": ["src/mods/*"],
+      "#open-api/*": ["src/open-api/*"],
       "#utils/*": ["src/utils/*"],
       "#queues/*": ["src/queues/*"]
     }
