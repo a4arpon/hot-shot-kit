@@ -11,7 +11,7 @@ import { applicationRoutes, applicationWorkers } from "./mod-manager"
 import { serve } from "@hono/node-server"
 import { getRuntimeKey } from "hono/adapter"
 import { swaggerUI } from "@hono/swagger-ui"
-import { swaggerDocument } from "#libs/open-api"
+import { openAPISpecs } from "#libs/open-api"
 
 async function bootstrap() {
   const app = new Hono()
@@ -25,7 +25,7 @@ async function bootstrap() {
   })
 
   app.get("/openapi.json", (c) => {
-    return c.json(swaggerDocument)
+    return c.json(openAPISpecs())
   })
 
   app.get(
@@ -36,11 +36,19 @@ async function bootstrap() {
     }),
   )
 
-  app.route("/", applicationRoutes)
+  /*
+   * ---------------------------------------------------------------------
+   * Adding version prefix
+   * ---------------------------------------------------------------------
+   */
+
+  app.route(env.API_VERSION, applicationRoutes)
 
   /*
    * ---------------------------------------------------------------------
-   * Application Server Adapter
+   * Application server adapter
+   *
+   * HotShot is designned to be supported on multiple runtiems like it ancestor
    * ---------------------------------------------------------------------
    */
 
@@ -50,7 +58,13 @@ async function bootstrap() {
       port: env.PORT,
       reusePort: true,
     })
-  } else {
+  }
+  // else if (typeof Deno !== "undefined") {
+  //   Deno.serve({
+  //     fetch: app.fetch,
+  //   })
+  // }
+  else {
     serve({
       fetch: app.fetch,
       port: Number.parseInt(env.PORT),
@@ -68,6 +82,7 @@ bootstrap()
       ENV: process.env.NODE_ENV,
       URL: `http://localhost:${env.PORT}`,
       Adapter: getRuntimeKey(),
+      API_V: env.API_VERSION,
     })
   })
   .catch((err) => {

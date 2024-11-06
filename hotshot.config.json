@@ -7,15 +7,28 @@
         "type": "router",
         "name": "auth",
         "path": "./src/mods/auth-mod",
-        "contains": ["router", "controller", "services"],
-        "services": ["auth.services"]
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "auth.services"
+        ]
       },
       {
         "type": "router",
         "name": "blogs",
         "path": "./src/mods/blogs-mod",
-        "contains": ["router", "controller", "services"],
-        "services": ["blogs.services", "comments.services"]
+        "contains": [
+          "router",
+          "controller",
+          "services"
+        ],
+        "services": [
+          "blogs.services",
+          "comments.services"
+        ]
       }
     ],
     "useGuards": [
@@ -41,6 +54,12 @@
         "core": "Redis",
         "name": "blogs",
         "path": "./src/cache-drivers/blogs.cache"
+      }
+    ],
+    "openApiSpecs": [
+      {
+        "name": "author",
+        "path": "./src/open-api/author.openapi"
       }
     ]
   }
