@@ -10,8 +10,8 @@ import { routerFactory } from "@a4arpon/hotshot"
 import { AuthRouter } from "#mods/auth-mod/routes"
 import { BlogsRouter } from "#mods/blogs-mod/routes"
 import { NotificationQueueWorker } from "#queues/notification.worker"
-import { BlogsSpecs } from "./open-api/blogs"
 import { AuthorOpenApiSpecs } from "./open-api/author.openapi"
+import { BlogsOpenApiSpecs } from "#open-api/blogs.openapi"
 
 /*
  * ------------------------------------------------------------------------
@@ -35,4 +35,4 @@ export const applicationWorkers = [NotificationQueueWorker]
  * ------------------------------------------------------------------------
  */
 
-export const openApiSpecs = [BlogsSpecs, AuthorOpenApiSpecs]
+export const openApiSpecs = [AuthorOpenApiSpecs, BlogsOpenApiSpecs]

@@ -124,7 +124,15 @@ function apiSpecGen(
   registry.registerPath({
     ...api,
     request: requestBody
-      ? { body: { content: { "application/json": { schema: requestBody } } } }
+      ? {
+          body: {
+            content: {
+              "application/json": {
+                schema: requestBody,
+              },
+            },
+          },
+        }
       : undefined,
   })
 }

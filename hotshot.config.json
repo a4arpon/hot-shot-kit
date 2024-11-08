@@ -60,6 +60,10 @@
       {
         "name": "author",
         "path": "./src/open-api/author.openapi"
+      },
+      {
+        "name": "blogs",
+        "path": "./src/open-api/blogs.openapi"
       }
     ]
   }
