@@ -32,7 +32,6 @@ async function bootstrap() {
     "/docs",
     swaggerUI({
       url: "/openapi.json",
-      layout: "BaseLayout",
     }),
   )
 
