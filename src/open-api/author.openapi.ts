@@ -47,7 +47,7 @@ export class AuthorOpenApiSpecs implements UseOpenApi {
     path: "/author/{authorSlug}",
     pathParams: ["authorSlug"],
     tags: ["Author"],
-    summery: "Get single Author from server",
+    summery: "Get single Author from serverdfd",
   }
 
   private addItem: ApiSpecs = {

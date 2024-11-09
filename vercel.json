@@ -8,12 +8,13 @@
       }
     }
   ],
+  "installCommand": "npm -v",
   "buildCommand": "npm run vercel:prod",
   "routes": [
     {
       "src": "/(.*)",
       "dest": "server/app.js",
-      "methods": ["GET", "POST", "PATCH", "PUT", "DELETE", "OPTIONS"],
+      "methods": ["GET", "POST", "PATCH", "PUT", "DELETE"],
       "headers": {
         "Access-Control-Allow-Origin": "*"
       }
