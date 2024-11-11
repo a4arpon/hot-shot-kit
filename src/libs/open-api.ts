@@ -4,6 +4,7 @@ import {
   OpenAPIRegistry,
   type RouteConfig,
 } from "@asteasolutions/zod-to-openapi"
+import { faker } from "@faker-js/faker"
 import { openApiSpecs } from "src/mod-manager"
 import { z, type ZodSchema } from "zod"
 
@@ -129,6 +130,7 @@ function apiSpecGen(
             content: {
               "application/json": {
                 schema: requestBody,
+                example: generateMockData(requestBody),
               },
             },
           },
@@ -157,4 +159,95 @@ export function openAPISpecs() {
   return new OpenApiGeneratorV3(registry.definitions).generateDocument(
     openApiConfig,
   )
+}
+
+// Faker JS
+export function generateMockData(
+  schema: ZodSchema,
+  fieldName = "",
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  context: any = {},
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+): any {
+  if (schema instanceof z.ZodObject) {
+    const shape = schema.shape
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    const data: { [key: string]: any } = {}
+    for (const key in shape) {
+      data[key] = generateMockData(shape[key], key, context)
+    }
+    return data
+  }
+  if (schema instanceof z.ZodString) {
+    if (/firstName/i.test(fieldName)) {
+      const gender = context?.gender || faker.person.sexType()
+      return faker.person.firstName(gender as "male" | "female")
+    }
+    if (/lastName/i.test(fieldName)) {
+      return faker.person.lastName()
+    }
+    if (/fullName|name/i.test(fieldName)) {
+      const gender = context?.gender || faker.person.sexType()
+      return faker.person.fullName({ sex: gender as "male" | "female" })
+    }
+    if (/email/i.test(fieldName)) {
+      return faker.internet.email()
+    }
+    if (/phone|phoneNumber/i.test(fieldName)) {
+      return faker.phone.number()
+    }
+    if (/city/i.test(fieldName)) {
+      return faker.location.city()
+    }
+    if (/country/i.test(fieldName)) {
+      return faker.location.country()
+    }
+    return faker.lorem.words()
+  }
+  if (schema instanceof z.ZodNumber) {
+    let min: number | undefined
+    let max: number | undefined
+    const isInt = schema.isInt
+
+    for (const check of schema._def.checks) {
+      if (check.kind === "min") {
+        min = check.value
+      }
+      if (check.kind === "max") {
+        max = check.value
+      }
+    }
+
+    if (isInt) {
+      return faker.number.int({ min, max })
+    }
+    return faker.number.float({ min, max })
+  }
+  if (schema instanceof z.ZodBoolean) {
+    return faker.datatype.boolean()
+  }
+  if (schema instanceof z.ZodDate) {
+    return faker.date.recent()
+  }
+  if (schema instanceof z.ZodArray) {
+    const itemSchema = schema.element
+    const arrayLength = faker.number.int({ min: 1, max: 5 })
+    return Array.from({ length: arrayLength }, () =>
+      generateMockData(itemSchema, fieldName, context),
+    )
+  }
+  if (schema instanceof z.ZodNullable) {
+    return Math.random() < 0.5
+      ? null
+      : generateMockData(schema.unwrap(), fieldName, context)
+  }
+  if (schema instanceof z.ZodEnum) {
+    const options = schema.options
+    const value = faker.helpers.arrayElement(options)
+    if (/gender|sex/i.test(fieldName)) {
+      context.gender = value
+    }
+    return value
+  }
+  return null
 }

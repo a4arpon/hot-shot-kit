@@ -1,3 +1,4 @@
+import type { OpenAPIObjectConfig } from "@asteasolutions/zod-to-openapi/dist/v3.0/openapi-generator"
 import { env } from "./env"
 
 export const secureHeadersConfig = {
@@ -27,12 +28,15 @@ export const corsConfig = {
   allowedHeaders: ["Content-Type", "Authorization"],
 }
 
-export const openApiConfig = {
+export const openApiConfig: OpenAPIObjectConfig = {
   openapi: "3.0.0",
   info: {
-    version: "6.0.0",
+    version: env.API_VERSION,
     title: "HotShot Api",
     description: "There you will find all HotShot apis",
   },
-  servers: [{ url: `http://localhost:${env.PORT}/${env.API_VERSION}` }],
+  servers: [
+    { url: `http://localhost:${env.PORT}/${env.API_VERSION}` },
+    { url: `https://hot-shot-kit.vercel.app/${env.API_VERSION}` },
+  ],
 }
