@@ -11,4 +11,8 @@ export class BlogsController {
   blogs = async (_ctx: Context) => {
     return this.blogsServices.blogs()
   }
+
+  addNewBlog = async (_ctx: Context) => {
+    return this.blogsServices.addNewBlog()
+  }
 }

@@ -1,4 +1,4 @@
-import { router, routerContainer } from "@a4arpon/hotshot"
+import { route, router, routerContainer } from "@a4arpon/hotshot"
 import type { Hono } from "hono"
 import { AuthController } from "./controller"
 
@@ -17,13 +17,7 @@ export class AuthRouter {
 
     return router({
       basePath: "/",
-      routes: [
-        {
-          path: "/",
-          method: "GET",
-          controller: authController.auth,
-        },
-      ],
+      routes: [route("POST").controller(authController.auth)],
     })
   }
 }

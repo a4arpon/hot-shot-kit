@@ -13,7 +13,7 @@
       "#cache-drivers/*": ["src/cache-drivers/*"],
       "#conf/*": ["src/conf/*"],
       "#libs/*": ["src/libs/*"],
-      "#middlewares/*": ["src/middlewares/*"],
+      "#use-guards/*": ["src/use-guards/*"],
       "#schemas/*": ["src/schemas/*"],
       "#mods/*": ["src/mods/*"],
       "#open-api/*": ["src/open-api/*"],
